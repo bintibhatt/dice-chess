@@ -1,0 +1,94 @@
+.dice-container {
+    display: flex;
+}
+
+.dice {
+    width: 80px;
+    height: 80px;
+    transform-style: preserve-3d;
+    margin-right: 20px;
+    position: relative;
+}
+
+.dice .face {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 70px;
+    font-weight: 500;
+    background-color: #ffd09a;
+    border: 3px solid white;
+}
+
+.dice .front {
+    transform: translateZ(40px);
+}
+
+.dice .back {
+    transform: rotateY(180deg) translateZ(40px);
+}
+
+.dice .right {
+    transform: rotateY(-90deg) translateZ(40px);
+}
+
+.dice .left {
+    transform: rotateY(90deg) translateZ(40px);
+}
+
+.dice .top {
+    transform: rotateX(-90deg) translateZ(40px);
+}
+
+.dice .bottom {
+    transform: rotateX(90deg) translateZ(40px);
+}
+
+.dice.rolling {
+    animation: rollAnimation 3s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+/* @keyframes rollAnimation {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(720deg) rotateY(720deg) rotateZ(720deg);
+  }
+} */
+
+@keyframes rollAnimation {
+    0% {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateX(720deg) rotateY(720deg);
+    }
+}
+
+.dice_rolling {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    margin-top: 20px;
+    margin-left: 80px;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: rgb(255, 85, 0);
+    color: #fff;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ff9c5a;
+    color: black;
+}

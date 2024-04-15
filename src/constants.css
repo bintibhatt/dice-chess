@@ -1,0 +1,14 @@
+:root {
+    --tile-size: 75px;
+    --light-tile: #ffd09a;
+    --dark-tile: #5f2701;
+    --bg-color: #202020;
+    --highlight: rgba(0, 0, 0, .1);
+    --check: #FEEC48;
+}
+
+@media all and (max-width: 450px) {
+    :root {
+        --tile-size: 40px;
+    }
+}

@@ -1,0 +1,55 @@
+@import './constants.css';
+@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans&display=swap');
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  display: grid;
+  place-content: center;
+  height: 100vh;
+  font-family: 'Sofia Sans', sans-serif;
+  grid-template-columns: 220px auto;
+}
+
+.main_app {
+  background: var(--bg-color);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.main_app p {
+  color: white;
+  font-size: 60px;
+  text-align: center;
+}
+
+button {
+  background: var(--dark-tile);
+  color: var(--light-tile);
+  border: 0 none;
+  padding: 10px 30px;
+  margin: 10px 0;
+  font-size: 1.1em;
+}
+
+
+@media (max-width: 768px) {
+  .App {
+    grid-template-columns: auto;
+  }
+
+
+
+  .main_app {
+    flex-direction: column;
+  }
+
+  .main_app p {
+    font-size: 40px;
+  }
+}
