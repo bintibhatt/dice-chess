@@ -1,70 +1,149 @@
-# Getting Started with Create React App
+# 🎲 Dice Chess
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based implementation of Chess enhanced with a dice-rolling mechanic. The game combines traditional chess rules with randomized dice outcomes, creating a unique and strategic gameplay experience.
+
+## Features
+
+* Full chess board with drag-and-drop piece movement
+* Standard chess rules implementation
+
+  * Check detection
+  * Checkmate detection
+  * Stalemate detection
+  * Castling
+  * Pawn promotion
+  * Move history tracking
+  * Undo moves
+* Interactive dice rolling system
+* Real-time move highlighting
+* Game state management using React Context and Reducer
+* Responsive user interface
+
+## Project Structure
+
+```text
+src/
+│
+├── arbiter/              # Chess rules and move validation
+├── assets/               # Chess piece images
+├── components/
+│   ├── Board/            # Chess board UI
+│   ├── Control/          # Move list and controls
+│   ├── Pieces/           # Piece rendering and movement
+│   └── Popup/            # Promotion and game-end dialogs
+│
+├── contexts/             # React Context API
+├── dice/                 # Dice rolling component
+├── reducer/              # State management
+├── constants.js          # Initial game configuration
+├── helper.js             # Utility functions
+└── App.js                # Main application component
+```
+
+## Technologies Used
+
+* React 18
+* JavaScript (ES6+)
+* Context API
+* useReducer State Management
+* CSS3
+
+## Installation
+
+### Clone the Repository
+
+```bash
+git clone <repository-url>
+cd dice-chess
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Start Development Server
+
+```bash
+npm start
+```
+
+The application will run at:
+
+```text
+http://localhost:3000
+```
 
 ## Available Scripts
 
-In the project directory, you can run:
+### Start Development Server
 
-### `npm start`
+```bash
+npm start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Runs the application in development mode.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Run Tests
 
-### `npm test`
+```bash
+npm test
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner.
 
-### `npm run build`
+### Build for Production
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm run build
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Creates an optimized production build in the `build` folder.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Eject Configuration
 
-### `npm run eject`
+```bash
+npm run eject
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Copies all configuration files into the project for full customization.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Gameplay
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Start a new game.
+2. Roll the dice using the Dice panel.
+3. Move pieces according to standard chess rules.
+4. Track moves in the move history panel.
+5. Use the Undo button to revert the previous move.
+6. Continue until checkmate, stalemate, or draw conditions are reached.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Chess Rules Supported
 
-## Learn More
+* Legal move validation
+* Check detection
+* Checkmate detection
+* Stalemate detection
+* Castling (Kingside and Queenside)
+* Pawn promotion
+* En passant
+* Insufficient material draw detection
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Future Improvements
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* Integrate dice outcomes directly into move restrictions
+* Multiplayer support
+* Online matchmaking
+* AI opponent
+* Timer support
+* Game save/load functionality
+* Mobile optimizations
+* Sound effects and animations
 
-### Code Splitting
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This project is intended for educational and learning purposes.
 
-### Analyzing the Bundle Size
+## Author
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Developed as a React-based Dice Chess application demonstrating chess logic, state management, and interactive UI design.
