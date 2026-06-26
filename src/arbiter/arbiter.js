@@ -81,7 +81,7 @@ const arbiter = {
     },
 
     isStalemate : function(position,player,castleDirection) {
-        const isInCheck = this.isPlayerInCheck({positionAfterMove: position, player})
+        const isInCheck = this.isPlayerInCheck({positionAfterMove: position, position, player})
 
         if (isInCheck)
             return false
@@ -133,7 +133,7 @@ const arbiter = {
     },
 
     isCheckMate : function(position,player,castleDirection) {
-        const isInCheck = this.isPlayerInCheck({positionAfterMove: position, player})
+        const isInCheck = this.isPlayerInCheck({positionAfterMove: position, position, player})
 
         if (!isInCheck)
             return false

@@ -39,21 +39,25 @@ const PromotionBox = ({onClosePopup}) => {
 
     const onClick = option => {
         onClosePopup()
-        const newPosition = copyPosition (appState.position[appState.position.length - 1])
-        
-        newPosition[promotionSquare.rank][promotionSquare.file] = ''
-        newPosition[promotionSquare.x][promotionSquare.y] = color+option
+        const currentPosition = appState.position[appState.position.length - 1];
+        const newPosition = copyPosition(currentPosition);
+
+        // Clear the pawn's original square and place the promoted piece
+        newPosition[promotionSquare.rank][promotionSquare.file] = "";
+        newPosition[promotionSquare.x][promotionSquare.y] = color + option;
+
+        const piece = color + "p";
         const newMove = getNewMoveNotation({
-            ...appState.selectedPiece,
-            x : promotionSquare.rank,
-            y : promotionSquare.file,
-            position:appState.position[appState.position.length - 1],
-            promotesTo : option
-        })
-        dispatch(clearCandidates())
-
-        dispatch(makeNewMove({newPosition,newMove}))
-
+          piece,
+          rank: promotionSquare.rank,
+          file: promotionSquare.file,
+          x: promotionSquare.x,
+          y: promotionSquare.y,
+          position: currentPosition,
+          promotesTo: option,
+        });
+        dispatch(clearCandidates());
+        dispatch(makeNewMove({ newPosition, newMove }));
     }
 
     return <div className="popup--inner promotion-choices" style={getPromotionBoxPosition()}>

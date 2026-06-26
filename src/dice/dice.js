@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "./dice.css";
-import pawnImage from "../assets/bp.png";
-import knightImage from "../assets/bn.png";
-import bishopImage from "../assets/bb.png";
-import rookImage from "../assets/br.png";
-import queenImage from "../assets/bq.png";
-import kingImage from "../assets/bk.png";
+import pawnImage from "../assets/bp.svg";
+import knightImage from "../assets/bn.svg";
+import bishopImage from "../assets/bb.svg";
+import rookImage from "../assets/br.svg";
+import queenImage from "../assets/bq.svg";
+import kingImage from "../assets/bk.svg";
 
 const Dice = ({ onRoll, disabled }) => {
   const [rolling, setRolling] = useState(false);
@@ -30,10 +30,9 @@ const Dice = ({ onRoll, disabled }) => {
         setRolling(false);
         const newValues = Array.from(
           { length: 3 },
-          () => Math.floor(Math.random() * 6) + 1
+          () => Math.floor(Math.random() * 6) + 1,
         );
         setCurrentDiceValues(newValues);
-        localStorage.setItem("dice", newValues);
         onRoll(newValues);
         return;
       }
@@ -41,7 +40,7 @@ const Dice = ({ onRoll, disabled }) => {
       // Perform rolling animation
       const newValues = Array.from(
         { length: 3 },
-        () => Math.floor(Math.random() * 6) + 1
+        () => Math.floor(Math.random() * 6) + 1,
       );
       setCurrentDiceValues(newValues);
       requestAnimationFrame(animate);

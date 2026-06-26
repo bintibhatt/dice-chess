@@ -20,6 +20,8 @@ export const reducer = (state, action) => {
                 position,
                 movesList,
                 turn,
+                diceValues : [],
+                diceRolled : false,
             }
         }
 
@@ -55,13 +57,22 @@ export const reducer = (state, action) => {
         }
 
         case actionTypes.CAN_CASTLE : {
-            let {turn,castleDirection} = state 
-        
-            castleDirection[turn] = action.payload
-            
+            const {turn,castleDirection} = state 
+
             return {
                 ...state,
-                castleDirection,
+                castleDirection : {
+                    ...castleDirection,
+                    [turn] : action.payload,
+                },
+            }
+        }
+
+        case actionTypes.SET_DICE_VALUES : {
+            return {
+                ...state,
+                diceValues : action.payload,
+                diceRolled : true,
             }
         }
         
@@ -105,6 +116,8 @@ export const reducer = (state, action) => {
                 position,
                 movesList,
                 turn,
+                diceValues : [],
+                diceRolled : false,
             }
         }
 

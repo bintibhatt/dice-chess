@@ -113,25 +113,22 @@ export const getKingMoves = ({position,piece,rank,file}) => {
     return moves
 }
 
-export const getPawnMoves = ({position,piece,rank,file}) => {
+export const getPawnMoves = ({ position, piece, rank, file }) => {
+  const moves = [];
+  const dir = piece === "wp" ? 1 : -1;
 
-    const moves = []
-    const dir = piece==='wp' ? 1 : -1
+  // Move one tile forward (must be on board and empty)
+  if (position?.[rank + dir]?.[file] === "") {
+    moves.push([rank + dir, file]);
 
-    // Move two tiles on first move
-    if (rank % 5 === 1){
-        if (position?.[rank+dir]?.[file] === '' && position?.[rank+dir+dir]?.[file] === ''){
-            moves.push ([rank+dir+dir,file])
-        }
+    // Move two tiles on first move (only if one-square move is also clear)
+    if (rank % 5 === 1 && position?.[rank + dir + dir]?.[file] === "") {
+      moves.push([rank + dir + dir, file]);
     }
+  }
 
-    // Move one tile
-    if (!position?.[rank+dir]?.[file]){
-        moves.push ([rank+dir,file])
-    }
-
-    return moves
-}
+  return moves;
+};
 
 export const getPawnCaptures =  ({position,prevPosition,piece,rank,file}) => {
 

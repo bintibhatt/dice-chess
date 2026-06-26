@@ -2,6 +2,10 @@
     display: grid;
     position: relative;
     grid-template-columns: calc(.25*var(--tile-size)) calc(8*var(--tile-size));
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(15, 23, 41, 0.15), 0 2px 8px rgba(15, 23, 41, 0.08);
+    border: 2px solid var(--color-border);
 }
 
 .tiles {
@@ -34,7 +38,7 @@
     display: block;
     position: absolute;
     content: '';
-    border: 6px solid var(--highlight);
+    border: 6px solid rgba(37, 99, 235, 0.4);
     width : calc(var(--tile-size) - 12px);
     height : calc(var(--tile-size) - 12px);
     border-radius: 50%;
@@ -47,8 +51,8 @@
     content: '';
     width :  var(--tile-size);
     height :  var(--tile-size);
-    background: var(--check);
-    border-radius: 20px;
+    background: rgba(239, 68, 68, 0.45);
+    border-radius: 8px;
     left: 0;
     top: 0;
 }

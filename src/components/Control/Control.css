@@ -4,4 +4,8 @@
     padding: 10px;
     text-align: center;
     height: calc(8*var(--tile-size));
+    background: var(--color-surface);
+    border-radius: 12px;
+    border: 1px solid var(--color-border-subtle);
+    margin-right: 12px;
 }

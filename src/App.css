@@ -1,5 +1,5 @@
 @import './constants.css';
-@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 html,
 body {
@@ -11,8 +11,9 @@ body {
   display: grid;
   place-content: center;
   height: 100vh;
-  font-family: 'Sofia Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   grid-template-columns: 220px auto;
+  color: var(--color-primary);
 }
 
 .main_app {
@@ -20,36 +21,65 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  min-height: 100vh;
+}
+
+.main_app > div:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
 .main_app p {
-  color: white;
-  font-size: 60px;
+  color: var(--color-primary);
+  font-size: 48px;
+  font-weight: 800;
   text-align: center;
+  letter-spacing: -1px;
+  margin: 0;
 }
 
 button {
-  background: var(--dark-tile);
-  color: var(--light-tile);
+  background: var(--color-accent);
+  color: #fff;
   border: 0 none;
   padding: 10px 30px;
   margin: 10px 0;
   font-size: 1.1em;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
+button:hover {
+  background: var(--color-accent-dim);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button:disabled {
+  background: var(--color-border);
+  cursor: not-allowed;
+  transform: none;
+}
 
 @media (max-width: 768px) {
   .App {
     grid-template-columns: auto;
   }
 
-
-
   .main_app {
     flex-direction: column;
+    gap: 20px;
   }
 
   .main_app p {
-    font-size: 40px;
+    font-size: 36px;
   }
 }

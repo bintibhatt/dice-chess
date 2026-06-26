@@ -8,13 +8,13 @@ import Control from "./components/Control/Control";
 import TakeBack from "./components/Control/bits/TakeBack";
 import MovesList from "./components/Control/bits/MovesList";
 import Dice from "./dice/dice";
+import { setDiceValues } from "./reducer/actions/dice";
 
 function App() {
   const [appState, dispatch] = useReducer(reducer, initGameState);
 
   const handleRoll = (values) => {
-    console.log("Dice values rolled:", values);
-    // Here you can handle the rolled dice values, update game state, etc.
+    dispatch(setDiceValues(values));
   };
 
   const providerState = {
@@ -27,7 +27,7 @@ function App() {
       <div className="main_app">
         <div>
           <p>Dice Chess </p>
-          <Dice onRoll={handleRoll} /> {/* Pass the handleRoll function */}
+          <Dice onRoll={handleRoll} disabled={appState.diceRolled} />
         </div>
         <div className="App">
           <Control>

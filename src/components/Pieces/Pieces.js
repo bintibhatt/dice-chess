@@ -55,14 +55,13 @@ const Pieces = () => {
 
   const move = (e) => {
     const { x, y } = calculateCoords(e);
-    const [piece, rank, file] = e.dataTransfer.getData("text").split(",");
+    const [piece, rawRank, rawFile] = e.dataTransfer.getData("text").split(",");
+    const rank = Number(rawRank);
+    const file = Number(rawFile);
 
     if (appState.candidateMoves.find((m) => m[0] === x && m[1] === y)) {
       const opponent = piece.startsWith("b") ? "w" : "b";
-      const castleDirection =
-        appState.castleDirection[
-          `${piece.startsWith("b") ? "white" : "black"}`
-        ];
+      const castleDirection = appState.castleDirection[opponent];
 
       if ((piece === "wp" && x === 7) || (piece === "bp" && x === 0)) {
         openPromotionBox({ rank, file, x, y });
@@ -102,28 +101,16 @@ const Pieces = () => {
 
   const onDrop = (e) => {
     e.preventDefault();
-    let diceValues = localStorage.getItem("dice").split(",");
 
-    for (let i = 0; i < diceValues.length; i++) {
-      if (diceValues[i] === "1") {
-        diceValues[i] = "p";
-      } else if (diceValues[i] === "2") {
-        diceValues[i] = "n";
-      } else if (diceValues[i] === "3") {
-        diceValues[i] = "b";
-      } else if (diceValues[i] === "4") {
-        diceValues[i] = "r";
-      } else if (diceValues[i] === "5") {
-        diceValues[i] = "q";
-      } else {
-        diceValues[i] = "k";
-      }
+    const { diceValues, diceRolled } = appState;
+
+    // Must roll dice before making a move
+    if (!diceRolled || diceValues.length === 0) {
+      return;
     }
 
-    // 1->p    2->n     3->b   4->r   5->q   6-> k
-
-    let selectedPiece = e.dataTransfer.getData("text").split(",")[0][1];
-    if (diceValues.includes(selectedPiece)) {
+    const pieceType = e.dataTransfer.getData("text").split(",")[0][1];
+    if (diceValues.includes(pieceType)) {
       move(e);
     }
   };

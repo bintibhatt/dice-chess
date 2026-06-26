@@ -1,12 +1,13 @@
 .moves-list {
     display: flex;
     flex-direction: row;
-    color: white;
+    color: var(--color-primary);
     flex: 1 1;
     flex-wrap: wrap;
     align-content: start;
     overflow: auto;
-    font-size: 1.1em;
+    font-size: 1em;
+    font-weight: 500;
 }
 
 .moves-list div {
@@ -21,5 +22,6 @@
     content: attr(data-number);
     position: absolute;
     left: 0;
-    opacity: 0.5;
+    color: var(--color-muted);
+    font-weight: 600;
 }
