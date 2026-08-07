@@ -6,10 +6,12 @@ import { useAppContext } from "../game/GameContext";
 import { makeNewMove, clearCandidates } from "@/lib/state/actions/move";
 import { openPromotion } from "@/lib/state/actions/popup";
 import { updateCastling } from "@/lib/state/actions/game";
+import { rollDice } from "@/lib/state/actions/dice";
 import { detectGameEnd } from "@/lib/state/detectGameEnd";
 import arbiter from "@/lib/chess/arbiter";
 import { getCastlingDirections } from "@/lib/chess/getMoves";
 import { getNewMoveNotation } from "@/lib/chess/helper";
+import { rollTwoDice, willPassTurn } from "@/lib/chess/diceRules";
 import Piece from "./Piece";
 
 const Pieces = () => {
@@ -50,13 +52,17 @@ const Pieces = () => {
         dispatch(makeNewMove({ newPosition, newMove }));
 
         const opponent = piece[0] === "w" ? "b" : "w";
-        detectGameEnd({
+        const gameEnded = detectGameEnd({
           dispatch,
           newPosition,
           mover: piece[0],
           opponent,
           castleDirection: appState.castleDirection[opponent],
         });
+
+        if (!gameEnded && willPassTurn(appState.dice)) {
+          dispatch(rollDice(rollTwoDice()));
+        }
       }
     }
     dispatch(clearCandidates());

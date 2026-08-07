@@ -3,8 +3,10 @@
 import styles from "./PromotionBox.module.css";
 import { useAppContext } from "../../game/GameContext";
 import { makeNewMove, clearCandidates } from "@/lib/state/actions/move";
+import { rollDice } from "@/lib/state/actions/dice";
 import { detectGameEnd } from "@/lib/state/detectGameEnd";
 import { copyPosition, getNewMoveNotation } from "@/lib/chess/helper";
+import { rollTwoDice, willPassTurn } from "@/lib/chess/diceRules";
 
 const options = ["q", "r", "b", "n"];
 
@@ -50,13 +52,17 @@ const PromotionBox = ({ onClosePopup }) => {
     dispatch(makeNewMove({ newPosition, newMove }));
 
     const opponent = color === "w" ? "b" : "w";
-    detectGameEnd({
+    const gameEnded = detectGameEnd({
       dispatch,
       newPosition,
       mover: color,
       opponent,
       castleDirection: appState.castleDirection[opponent],
     });
+
+    if (!gameEnded && willPassTurn(appState.dice)) {
+      dispatch(rollDice(rollTwoDice()));
+    }
   };
 
   return (
