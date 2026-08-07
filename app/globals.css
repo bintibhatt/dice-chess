@@ -1,26 +1,33 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* "High-Stakes Parlor" theme tokens — a felt-table/brass-fittings palette
+   used throughout, independent of the visitor's OS light/dark preference. */
+@theme {
+  --color-felt: #0f3a2c;
+  --color-felt-dark: #0a2a20;
+  --color-board-light: #ede1c8;
+  --color-board-dark: #4a2e1f;
+  --color-brass: #d8a548;
+  --color-garnet: #b3312c;
+  --color-teal: #3fa37e;
+  --color-ivory: #f4ede0;
+  --color-espresso: #1b120b;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+:root {
+  --tile-size: 75px;
+}
+
+@media (max-width: 450px) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --tile-size: 40px;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-felt);
+  color: var(--color-ivory);
 }
