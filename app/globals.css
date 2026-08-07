@@ -3,10 +3,10 @@
 /* "High-Stakes Parlor" theme tokens — a felt-table/brass-fittings palette
    used throughout, independent of the visitor's OS light/dark preference. */
 @theme {
-  --color-felt: #0f3a2c;
-  --color-felt-dark: #0a2a20;
-  --color-board-light: #ede1c8;
-  --color-board-dark: #4a2e1f;
+  --color-felt: #142a4d;
+  --color-felt-dark: #0a1830;
+  --color-board-light: #f2f2f2;
+  --color-board-dark: #1c1c1c;
   --color-brass: #d8a548;
   --color-garnet: #b3312c;
   --color-teal: #3fa37e;

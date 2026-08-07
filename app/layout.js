@@ -12,9 +12,22 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+const title = "Dice Chess";
+const description = "Chess with a twist: dice rolls decide which pieces you may move each turn.";
+
 export const metadata = {
-  title: "Dice Chess",
-  description: "Chess with a twist: dice rolls decide which pieces you may move each turn.",
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 export default function RootLayout({ children }) {
