@@ -69,10 +69,12 @@ const PromotionBox = ({ onClosePopup }) => {
     <div className={styles.overlay}>
       <div className={`${styles.box} animate-pop-in`} style={getBoxPosition()}>
         {options.map((option) => (
-          <div
+          <button
             key={option}
+            type="button"
             className={styles.option}
             style={{ backgroundImage: `url(/pieces/${color}${option}.png)` }}
+            aria-label={`Promote to ${option.toUpperCase()}`}
             onClick={() => onSelect(option)}
           />
         ))}
