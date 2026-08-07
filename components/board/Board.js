@@ -1,0 +1,76 @@
+"use client";
+
+import styles from "./Board.module.css";
+import { useAppContext } from "../game/GameContext";
+import Ranks from "./Ranks";
+import Files from "./Files";
+import Pieces from "../pieces/Pieces";
+import Popup from "../popup/Popup";
+import PromotionBox from "../popup/PromotionBox/PromotionBox";
+import GameEnds from "../popup/GameEnds/GameEnds";
+import arbiter from "@/lib/chess/arbiter";
+import { getKingPosition } from "@/lib/chess/getMoves";
+
+const ranks = [8, 7, 6, 5, 4, 3, 2, 1];
+const files = [1, 2, 3, 4, 5, 6, 7, 8];
+
+const Board = () => {
+  const { appState } = useAppContext();
+  const position = appState.position[appState.position.length - 1];
+
+  const isInCheck = arbiter.isPlayerInCheck({ positionAfterMove: position, player: appState.turn });
+  const checkedSquare = isInCheck ? getKingPosition(position, appState.turn) : null;
+
+  const getTileClassName = (rank, file) => {
+    const boardRank = rank - 1;
+    const boardFile = file - 1;
+    const classNames = [styles.tile];
+
+    classNames.push((7 - rank + file) % 2 === 0 ? styles.tileDark : styles.tileLight);
+
+    if (appState.candidateMoves?.some(([x, y]) => x === boardRank && y === boardFile)) {
+      classNames.push(position[boardRank][boardFile] ? styles.attacking : styles.highlight);
+    }
+
+    if (checkedSquare && checkedSquare[0] === boardRank && checkedSquare[1] === boardFile) {
+      classNames.push(styles.checked);
+    }
+
+    return classNames.join(" ");
+  };
+
+  const frameClass = isInCheck
+    ? "border-garnet animate-pulse"
+    : appState.dice.openOrders
+      ? "border-teal"
+      : "border-brass/70";
+
+  return (
+    <div
+      className={`rounded-xl border-4 bg-black/10 p-3 shadow-2xl shadow-black/50 transition-colors duration-500 ${frameClass}`}
+    >
+      <div className={styles.board}>
+        <Ranks ranks={ranks} />
+
+        <div className={styles.tiles}>
+          {ranks.map((rank) =>
+            files.map((file) => (
+              <div key={`${file}${rank}`} className={getTileClassName(rank, file)} />
+            ))
+          )}
+        </div>
+
+        <Pieces />
+
+        <Popup>
+          <PromotionBox />
+          <GameEnds />
+        </Popup>
+
+        <Files files={files} />
+      </div>
+    </div>
+  );
+};
+
+export default Board;

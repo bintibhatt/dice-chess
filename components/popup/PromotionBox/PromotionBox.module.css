@@ -1,0 +1,35 @@
+.overlay {
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: calc(0.25 * var(--tile-size));
+  bottom: calc(0.25 * var(--tile-size));
+}
+
+.box {
+  position: absolute;
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  background: var(--color-espresso);
+  border: 1px solid rgb(216 165 72 / 40%);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 50%);
+}
+
+.option {
+  width: calc(var(--tile-size));
+  height: calc(var(--tile-size));
+  background-color: rgb(255 255 255 / 5%);
+  background-size: 75%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, scale 0.15s ease;
+}
+
+.option:hover {
+  background-color: rgb(216 165 72 / 20%);
+  scale: 1.08;
+}

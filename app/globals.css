@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/* "High-Stakes Parlor" theme tokens — a felt-table/brass-fittings palette
+   used throughout, independent of the visitor's OS light/dark preference. */
+@theme {
+  --color-felt: #142a4d;
+  --color-felt-dark: #0a1830;
+  --color-board-light: #f2f2f2;
+  --color-board-dark: #1c1c1c;
+  --color-brass: #d8a548;
+  --color-garnet: #b3312c;
+  --color-teal: #3fa37e;
+  --color-ivory: #f4ede0;
+  --color-espresso: #1b120b;
+
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+
+  --animate-dice-shake: dice-shake 0.5s ease-in-out;
+  --animate-pop-in: pop-in 0.2s ease-out;
+}
+
+@keyframes dice-shake {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-8deg);
+  }
+  75% {
+    transform: rotate(8deg);
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    scale: 0.95;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+:root {
+  /* Fluid instead of a single fixed breakpoint: the board (8.25 tiles wide,
+     ranks column included) always fits the viewport with room to spare,
+     capped at 75px on anything wider than a small tablet. */
+  --tile-size: min(75px, calc((100vw - 48px) / 8.25));
+}
+
+body {
+  background: var(--color-felt);
+  color: var(--color-ivory);
+  background-image: radial-gradient(ellipse at center, var(--color-felt) 0%, var(--color-felt-dark) 100%);
+}
