@@ -7,21 +7,33 @@ const MovesList = () => {
     appState: { movesList },
   } = useAppContext();
 
+  const rows = [];
+  for (let i = 0; i < movesList.length; i += 2) {
+    rows.push({ number: i / 2 + 1, white: movesList[i], black: movesList[i + 1] });
+  }
+
   return (
-    <div className="max-h-80 overflow-y-auto rounded-xl border border-brass/20 bg-felt-dark/60 p-3 text-sm text-ivory">
-      {movesList.length === 0 ? (
-        <p className="text-ivory/50">No moves yet.</p>
-      ) : (
-        movesList.map((move, i) =>
-          i % 2 === 0 ? (
-            <div key={i} className="flex gap-2">
-              <span className="w-6 text-ivory/50">{i / 2 + 1}.</span>
-              <span>{move}</span>
-              {movesList[i + 1] && <span>{movesList[i + 1]}</span>}
+    <div className="flex flex-col gap-2 rounded-2xl border border-brass/20 bg-felt-dark/70 p-4 text-ivory shadow-lg">
+      <h2 className="font-display text-base font-semibold text-brass">Move History</h2>
+      <div className="h-px bg-brass/30" />
+      <div className="max-h-72 overflow-y-auto">
+        {rows.length === 0 ? (
+          <p className="py-4 text-center text-sm text-ivory/50">No moves yet — roll to begin.</p>
+        ) : (
+          rows.map((row, i) => (
+            <div
+              key={row.number}
+              className={`grid grid-cols-[2rem_1fr_1fr] gap-2 rounded px-1 py-1 text-sm ${
+                i === rows.length - 1 ? "border-l-2 border-brass bg-brass/10" : ""
+              }`}
+            >
+              <span className="text-ivory/50">{row.number}.</span>
+              <span>{row.white}</span>
+              <span>{row.black ?? ""}</span>
             </div>
-          ) : null
-        )
-      )}
+          ))
+        )}
+      </div>
     </div>
   );
 };

@@ -13,5 +13,21 @@
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
-  transform: translate(calc(var(--file) * 100%), calc((7 - var(--rank)) * 100%));
+  translate: calc(var(--file) * 100%) calc((7 - var(--rank)) * 100%);
+  transition: filter 0.2s ease, opacity 0.2s ease, scale 0.15s ease;
+}
+
+.movable {
+  cursor: grab;
+  filter: drop-shadow(0 0 6px rgb(216 165 72 / 70%));
+}
+
+.movable:hover {
+  scale: 1.08;
+}
+
+.locked {
+  opacity: 0.35;
+  filter: grayscale(70%);
+  cursor: not-allowed;
 }

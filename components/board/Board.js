@@ -18,13 +18,8 @@ const Board = () => {
   const { appState } = useAppContext();
   const position = appState.position[appState.position.length - 1];
 
-  const checkedSquare = (() => {
-    const isInCheck = arbiter.isPlayerInCheck({
-      positionAfterMove: position,
-      player: appState.turn,
-    });
-    return isInCheck ? getKingPosition(position, appState.turn) : null;
-  })();
+  const isInCheck = arbiter.isPlayerInCheck({ positionAfterMove: position, player: appState.turn });
+  const checkedSquare = isInCheck ? getKingPosition(position, appState.turn) : null;
 
   const getTileClassName = (rank, file) => {
     const boardRank = rank - 1;
@@ -44,26 +39,36 @@ const Board = () => {
     return classNames.join(" ");
   };
 
+  const frameClass = isInCheck
+    ? "border-garnet animate-pulse"
+    : appState.dice.openOrders
+      ? "border-teal"
+      : "border-brass/70";
+
   return (
-    <div className={styles.board}>
-      <Ranks ranks={ranks} />
+    <div
+      className={`rounded-xl border-4 bg-black/10 p-3 shadow-2xl shadow-black/50 transition-colors duration-500 ${frameClass}`}
+    >
+      <div className={styles.board}>
+        <Ranks ranks={ranks} />
 
-      <div className={styles.tiles}>
-        {ranks.map((rank) =>
-          files.map((file) => (
-            <div key={`${file}${rank}`} className={getTileClassName(rank, file)} />
-          ))
-        )}
+        <div className={styles.tiles}>
+          {ranks.map((rank) =>
+            files.map((file) => (
+              <div key={`${file}${rank}`} className={getTileClassName(rank, file)} />
+            ))
+          )}
+        </div>
+
+        <Pieces />
+
+        <Popup>
+          <PromotionBox />
+          <GameEnds />
+        </Popup>
+
+        <Files files={files} />
       </div>
-
-      <Pieces />
-
-      <Popup>
-        <PromotionBox />
-        <GameEnds />
-      </Popup>
-
-      <Files files={files} />
     </div>
   );
 };

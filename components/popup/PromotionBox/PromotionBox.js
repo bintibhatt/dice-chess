@@ -67,7 +67,7 @@ const PromotionBox = ({ onClosePopup }) => {
 
   return (
     <div className={styles.overlay}>
-      <div className={styles.box} style={getBoxPosition()}>
+      <div className={`${styles.box} animate-pop-in`} style={getBoxPosition()}>
         {options.map((option) => (
           <div
             key={option}

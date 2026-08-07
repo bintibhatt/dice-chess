@@ -22,7 +22,6 @@ const Piece = ({ rank, file, piece }) => {
       rank,
       file,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMovable, positionHistory, castleDirection, turn, piece, rank, file]);
 
   const canDrag = candidateMoves.length > 0;
@@ -33,15 +32,15 @@ const Piece = ({ rank, file, piece }) => {
     dispatch(generateCandidates({ candidateMoves }));
   };
 
+  const stateClass = canDrag ? styles.movable : turn === piece[0] ? styles.locked : "";
+
   return (
     <div
-      className={styles.piece}
+      className={`${styles.piece} ${stateClass}`}
       style={{
         "--file": file,
         "--rank": rank,
         backgroundImage: `url(/pieces/${piece}.png)`,
-        opacity: turn === piece[0] && !canDrag ? 0.4 : 1,
-        cursor: canDrag ? "grab" : "default",
       }}
       draggable={canDrag}
       onDragStart={handleDragStart}
