@@ -4,6 +4,7 @@ import styles from "./Board.module.css";
 import { useAppContext } from "../game/GameContext";
 import Ranks from "./Ranks";
 import Files from "./Files";
+import Pieces from "../pieces/Pieces";
 import arbiter from "@/lib/chess/arbiter";
 import { getKingPosition } from "@/lib/chess/getMoves";
 
@@ -51,6 +52,8 @@ const Board = () => {
           ))
         )}
       </div>
+
+      <Pieces />
 
       <Files files={files} />
     </div>

@@ -1,0 +1,17 @@
+.pieces {
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: calc(0.25 * var(--tile-size));
+  bottom: calc(0.25 * var(--tile-size));
+}
+
+.piece {
+  position: absolute;
+  width: 12.5%;
+  height: 12.5%;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: translate(calc(var(--file) * 100%), calc((7 - var(--rank)) * 100%));
+}
