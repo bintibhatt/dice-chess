@@ -1,0 +1,22 @@
+.overlay {
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: calc(0.25 * var(--tile-size));
+  bottom: calc(0.25 * var(--tile-size));
+}
+
+.box {
+  position: absolute;
+  display: flex;
+  gap: 2px;
+}
+
+.option {
+  width: calc(var(--tile-size));
+  height: calc(var(--tile-size));
+  background-size: 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}

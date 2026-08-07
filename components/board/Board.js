@@ -5,6 +5,9 @@ import { useAppContext } from "../game/GameContext";
 import Ranks from "./Ranks";
 import Files from "./Files";
 import Pieces from "../pieces/Pieces";
+import Popup from "../popup/Popup";
+import PromotionBox from "../popup/PromotionBox/PromotionBox";
+import GameEnds from "../popup/GameEnds/GameEnds";
 import arbiter from "@/lib/chess/arbiter";
 import { getKingPosition } from "@/lib/chess/getMoves";
 
@@ -54,6 +57,11 @@ const Board = () => {
       </div>
 
       <Pieces />
+
+      <Popup>
+        <PromotionBox />
+        <GameEnds />
+      </Popup>
 
       <Files files={files} />
     </div>

@@ -4,7 +4,11 @@ import styles from "./Pieces.module.css";
 import { useRef } from "react";
 import { useAppContext } from "../game/GameContext";
 import { makeNewMove, clearCandidates } from "@/lib/state/actions/move";
+import { openPromotion } from "@/lib/state/actions/popup";
+import { updateCastling } from "@/lib/state/actions/game";
+import { detectGameEnd } from "@/lib/state/detectGameEnd";
 import arbiter from "@/lib/chess/arbiter";
+import { getCastlingDirections } from "@/lib/chess/getMoves";
 import { getNewMoveNotation } from "@/lib/chess/helper";
 import Piece from "./Piece";
 
@@ -23,19 +27,37 @@ const Pieces = () => {
 
   const move = (e) => {
     const { x, y } = calculateCoords(e);
-    const [piece, rank, file] = e.dataTransfer.getData("text").split(",");
+    const [piece, rankStr, fileStr] = e.dataTransfer.getData("text").split(",");
+    const rank = Number(rankStr);
+    const file = Number(fileStr);
 
     if (appState.candidateMoves.some(([mx, my]) => mx === x && my === y)) {
-      const newPosition = arbiter.performMove({
-        position: currentPosition,
-        piece,
-        rank: Number(rank),
-        file: Number(file),
-        x,
-        y,
-      });
-      const newMove = getNewMoveNotation({ piece, rank, file, x, y, position: currentPosition });
-      dispatch(makeNewMove({ newPosition, newMove }));
+      if ((piece === "wp" && x === 7) || (piece === "bp" && x === 0)) {
+        dispatch(openPromotion({ piece, rank, file, x, y }));
+      } else {
+        if (piece.endsWith("r") || piece.endsWith("k")) {
+          const direction = getCastlingDirections({
+            castleDirection: appState.castleDirection,
+            piece,
+            file,
+            rank,
+          });
+          if (direction) dispatch(updateCastling(piece[0], direction));
+        }
+
+        const newPosition = arbiter.performMove({ position: currentPosition, piece, rank, file, x, y });
+        const newMove = getNewMoveNotation({ piece, rank, file, x, y, position: currentPosition });
+        dispatch(makeNewMove({ newPosition, newMove }));
+
+        const opponent = piece[0] === "w" ? "b" : "w";
+        detectGameEnd({
+          dispatch,
+          newPosition,
+          mover: piece[0],
+          opponent,
+          castleDirection: appState.castleDirection[opponent],
+        });
+      }
     }
     dispatch(clearCandidates());
   };
