@@ -29,7 +29,8 @@ const Pieces = () => {
 
   const move = (e) => {
     const { x, y } = calculateCoords(e);
-    const [piece, rankStr, fileStr] = e.dataTransfer.getData("text").split(",");
+    const raw = e.dataTransfer.getData("text/plain") || e.dataTransfer.getData("text");
+    const [piece, rankStr, fileStr] = raw.split(",");
     const rank = Number(rankStr);
     const file = Number(fileStr);
 
